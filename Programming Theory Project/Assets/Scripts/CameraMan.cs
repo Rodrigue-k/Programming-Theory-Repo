@@ -4,12 +4,26 @@ using UnityEngine;
 
 public class CameraMan : MonoBehaviour
 {
-    public GameObject player;
+    public GameManager gameManager;
+
     private Vector3 offset = new Vector3(-0.28f, 1.4f, -2.7f);
 
-    // Update is called once per frame
-    private void LateUpdate()
+    private void Start()
     {
-        transform.position = player.transform.position + offset;
+        StartCoroutine(FollowPlayer());
+    }
+
+    private IEnumerator FollowPlayer()
+    {
+        while (gameManager.playerInstance == null)
+        {
+            yield return null;  // Attendez le prochain frame
+        }
+
+        while (true)
+        {
+            transform.position = gameManager.playerInstance.transform.position + offset;
+            yield return null;  // Attendez le prochain frame
+        }
     }
 }

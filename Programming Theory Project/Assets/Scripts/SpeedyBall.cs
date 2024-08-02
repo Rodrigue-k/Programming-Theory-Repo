@@ -9,7 +9,7 @@ public class SpeedyBall : Ball
     {
         base.Start();
         Speed = 10f;
-        JumpForce = 0;
+        JumpForce = 10;
     }
 
     protected override void Move()
